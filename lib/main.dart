@@ -6,24 +6,18 @@ import 'catalog.dart';
 
 void main() => runApp(MyApp());
 
+final cartBloc = CartBloc();
+
 class MyApp extends StatelessWidget {
-  final _cartBloc = CartBloc();
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider( //BlocProvider는 여러가지 Bloc을 제공할 수 있음
-      bloc: _cartBloc,
-      child: BlocBuilder( //BlocProvider가 Bloc을 child에게 전달
-          bloc: _cartBloc,
-          builder: (BuildContext context, List state) {
-            return MaterialApp(
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              home: LoginScreen(),
-            );
-          }),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: LoginScreen(),
     );
   }
 }
