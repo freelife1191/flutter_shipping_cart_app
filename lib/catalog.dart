@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shippingcart/bloc/cart_provider.dart';
 import 'package:shippingcart/cart.dart';
+import 'package:shippingcart/item.dart';
 import 'package:shippingcart/main.dart';
 
 import 'bloc/cart_bloc.dart';
-import 'package:shippingcart/item.dart';
 
 /**
  * Created by freelife1191.good@gmail.com on 2019-06-10
@@ -20,6 +21,7 @@ class _CatalogState extends State<Catalog> {
 
   @override
   Widget build(BuildContext context) {
+    CartBloc cartBloc = CartProvider.of(context); //CartProvider의 cartBloc을 지정함
     return Scaffold(
       appBar: AppBar(
         title: Text('Catalog'),
@@ -38,14 +40,14 @@ class _CatalogState extends State<Catalog> {
           builder: (context, snapshot) {
             return ListView(
               children: cartBloc.itemList
-                  .map((item) => _buildItem(item, snapshot.data))
+                  .map((item) => _buildItem(item, snapshot.data, cartBloc))
                   .toList(),
             );
           })
     );
   }
 
-  Widget _buildItem(Item item, List<Item> state, ) {
+  Widget _buildItem(Item item, List<Item> state, CartBloc cartBloc, ) {
     final isChecked = state.contains(item);
     
     return Padding(

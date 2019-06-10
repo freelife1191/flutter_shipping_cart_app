@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shippingcart/bloc/cart_provider.dart';
 
 import 'bloc/cart_bloc.dart';
 import 'catalog.dart';
 
 void main() => runApp(MyApp());
 
-final cartBloc = CartBloc();
-
 class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return CartProvider( //감싸기만 해도 cartBloc을 지정하지 않아 제공이 되는 Provider임
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: LoginScreen(),
       ),
-      home: LoginScreen(),
     );
   }
 }
